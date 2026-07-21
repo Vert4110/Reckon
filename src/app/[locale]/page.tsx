@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getAllTools } from "@/lib/engine/registry";
+import { getCategoryLabel } from "@/lib/engine/categoryLabels";
 import type { Locale } from "@/lib/engine/types";
 
 export default function HomePage({ params }: { params: { locale: Locale } }) {
@@ -20,7 +21,15 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
 
       {categories.map((category) => (
         <section key={category} className="mb-9">
-          <h2 className="font-display text-xl mb-3 capitalize">{category}</h2>
+          <div className="mb-3 flex items-center justify-between gap-4">
+            <h2 className="font-display text-xl">{getCategoryLabel(category, locale)}</h2>
+            <Link
+              href={`/${locale}/${category}`}
+              className="text-sm font-mono border border-hairline rounded-full px-3 py-2 text-ink-soft hover:border-teal transition-colors"
+            >
+              {locale === "fr" ? "Voir tout" : "View all"}
+            </Link>
+          </div>
           <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
             {tools
               .filter((t) => t.category === category)
@@ -31,6 +40,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
                   className="block rounded-lg border border-hairline bg-paper-raised p-4 hover:border-teal transition-colors"
                 >
                   <div className="font-semibold">{tool.seo.h1[locale] ?? tool.seo.h1.en}</div>
+                  <p className="mt-2 text-ink-soft text-sm">{tool.seo.metaDescription[locale] ?? tool.seo.metaDescription.en}</p>
                 </Link>
               ))}
           </div>
