@@ -62,21 +62,28 @@ export const percentageCalculator: ToolDefinition = {
     },
     faq: {
       en: [
-        {
-          q: "How do I calculate a percentage by hand?",
-          a: "Multiply the number by the percentage value, then divide by 100. 20% of 150 = 150 × 0.20 = 30.",
-        },
-        {
-          q: "Can I use this for percentage increase or decrease?",
-          a: "This tool finds X% of a number. For increases or decreases over time, use the percentage change calculator instead.",
-        },
+        { q: "How do I calculate a percentage by hand?", a: "Multiply the number by the percentage value, then divide by 100. 20% of 150 = 150 × 0.20 = 30." },
+        { q: "Can I use this for percentage increase or decrease?", a: "This tool finds X% of a number. For increases or decreases over time, use the percentage change calculator instead." },
+        { q: "What does 'percent' actually mean?", a: "Percent means 'per hundred' — 20% is 20 out of every 100, or 0.20 written as a decimal." },
       ],
       fr: [
-        {
-          q: "Comment calculer un pourcentage à la main ?",
-          a: "Multipliez le nombre par la valeur du pourcentage, puis divisez par 100. 20% de 150 = 150 × 0,20 = 30.",
-        },
+        { q: "Comment calculer un pourcentage à la main ?", a: "Multipliez le nombre par la valeur du pourcentage, puis divisez par 100. 20% de 150 = 150 × 0,20 = 30." },
+        { q: "Puis-je l'utiliser pour une augmentation ou une baisse en pourcentage ?", a: "Cet outil calcule X% d'un nombre. Pour une variation dans le temps, utilisez le calculateur de variation en pourcentage." },
+        { q: "Que signifie « pourcentage » ?", a: "Pourcentage signifie « pour cent » — 20% représente 20 sur 100, soit 0,20 en écriture décimale." },
       ],
+    },
+    examples: {
+      en: [
+        { input: "20% of 150", output: "30" },
+        { input: "8% of 250", output: "20" },
+        { input: "50% of 84", output: "42" },
+      ],
+      fr: [
+        { input: "20% de 150", output: "30" },
+        { input: "8% de 250", output: "20" },
+        { input: "50% de 84", output: "42" },
+      ],
+    }, 
     },
   },
 
