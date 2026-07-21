@@ -1,6 +1,7 @@
 import type { Locale } from "@/lib/engine/types";
 import Link from "next/link";
 import "../globals.css";
+import MobileNav from "@/components/MobileNav";
 
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "fr" }];
@@ -26,6 +27,7 @@ export default function LocaleLayout({
               RECKON
             </Link>
             <nav className="flex items-center gap-6">
+              <MobileNav locale={locale} />
               <Link href={`/${locale}/calculators`} className="text-sm text-ink-soft hidden sm:inline">
                 {locale === "fr" ? "Calculateurs" : "Calculators"}
               </Link>

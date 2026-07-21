@@ -72,7 +72,13 @@ export default function CalculatorForm({
 
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
         {tool.outputs.map((out) => (
-          <ReadoutPanel key={out.key} label={out.label[locale] ?? out.label.en ?? out.key} value={result[out.key]} out={out} />
+          <ReadoutPanel
+            key={out.key}
+            label={out.label[locale] ?? out.label.en ?? out.key}
+            value={result[out.key]}
+            out={out}
+            locale={locale}
+          />
         ))}
       </div>
     </div>
@@ -83,11 +89,15 @@ function ReadoutPanel({
   label,
   value,
   out,
+  locale,
 }: {
   label: string;
   value: number | string | undefined;
   out: OutputFieldDefinition;
+  locale: Locale;
 }) {
+  const [copied, setCopied] = useState(false);
+
   const display =
     value === undefined
       ? "—"
@@ -95,13 +105,29 @@ function ReadoutPanel({
       ? value.toLocaleString(undefined, { maximumFractionDigits: out.decimals ?? 2 })
       : value;
 
+  function handleCopy() {
+    const text = out.unit ? `${display} ${out.unit}` : String(display);
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  }
+
   return (
-    <div className="rounded-lg bg-ink px-5 py-4 text-amber">
+    <div className="relative rounded-lg bg-ink px-5 py-4 text-amber">
       <div className="font-mono text-[11px] uppercase tracking-wider text-[#7f9e93] mb-1">{label}</div>
       <div className="font-mono text-3xl md:text-4xl font-semibold drop-shadow-[0_0_18px_rgba(255,179,67,0.35)]">
         {display}
         {out.unit && <span className="text-base ml-1.5 text-[#c98a3a]">{out.unit}</span>}
       </div>
+
+      <button
+        onClick={handleCopy}
+        aria-label={locale === "fr" ? "Copier le résultat" : "Copy result"}
+        className="absolute top-3 right-3 text-[#7f9e93] hover:text-amber transition-colors text-xs font-mono"
+      >
+        {copied ? (locale === "fr" ? "Copié ✓" : "Copied ✓") : locale === "fr" ? "Copier" : "Copy"}
+      </button>
     </div>
   );
 }
