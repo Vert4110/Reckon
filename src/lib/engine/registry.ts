@@ -2,9 +2,18 @@ import type { ToolDefinition } from "./types";
 import { percentageCalculator } from "@/content/tools/percentage-calculator";
 import { lengthConverter } from "@/content/tools/length-converter";
 import { lifeInWeeks } from "@/content/tools/life-in-weeks";
+import { ageCalculator } from "@/content/tools/age-calculator";
+import { bmiCalculator } from "@/content/tools/bmi-calculator";
+import { temperatureConverter } from "@/content/tools/temperature-converter";
 
-// Adding tool #4: write the file, import it, add it here. That's the whole step.
-export const tools: ToolDefinition[] = [percentageCalculator, lengthConverter, lifeInWeeks];
+export const tools: ToolDefinition[] = [
+  percentageCalculator,
+  lengthConverter,
+  lifeInWeeks,
+  ageCalculator,
+  bmiCalculator,
+  temperatureConverter,
+];
 
 export function getAllTools(): ToolDefinition[] {
   return tools;
